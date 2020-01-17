@@ -21,8 +21,6 @@ static ssize_t happyb_read(struct file *file, char *buf, size_t count, loff_t *f
 	char msg[128];
 	int len;
 
-	pr_info("read: count: %ld, fpos: %lld", count, *f_pos);
-
 	len = snprintf(msg, sizeof msg, "Happy birthday, %s!\n", name);
 	if (*f_pos >= len) {
 		return 0;
@@ -42,8 +40,6 @@ static ssize_t happyb_write(struct file *file, const char *buf, size_t count, lo
 {
 	int len = count;
 	int i;
-
-	pr_info("write: count: %ld, fpos: %lld", count, *f_pos);
 
 	if (len > MAX_NAME) {
 		len = MAX_NAME;
