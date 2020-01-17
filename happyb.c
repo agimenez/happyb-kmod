@@ -15,18 +15,6 @@ static char *param_name = "my friend";
 
 static char name[MAX_NAME];
 
-/*
-static int happyb_open(struct inode *inode, struct file *file)
-{
-	return 0;
-}
-
-static int happyb_release(struct inode *inode, struct file *file)
-{
-	return 0;
-}
-*/
-
 static ssize_t happyb_read(struct file *file, char *buf, size_t count, loff_t *f_pos)
 {
 	char msg[128];
@@ -57,9 +45,6 @@ static ssize_t happyb_write(struct file *file, const char *buf, size_t count, lo
 struct file_operations happyb_fops = {
     read: happyb_read,
     write: happyb_write,
-    /*open: happyb_open,
-    release: happyb_release,
-	*/
 };
 
 struct miscdevice happyb_dev = {
