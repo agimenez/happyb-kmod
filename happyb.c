@@ -20,7 +20,7 @@ static ssize_t happyb_read(struct file *file, char *buf, size_t count, loff_t *f
 	char msg[128];
 	int len;
 
-	pr_info("count: %ld, fpos: %lld", count, *f_pos);
+	pr_info("read: count: %ld, fpos: %lld", count, *f_pos);
 
 	len = snprintf(msg, sizeof msg, "Happy birthday, %s!\n", name);
 	if (*f_pos >= len) {
@@ -39,7 +39,27 @@ static ssize_t happyb_read(struct file *file, char *buf, size_t count, loff_t *f
 
 static ssize_t happyb_write(struct file *file, const char *buf, size_t count, loff_t *f_pos)
 {
-	return 0;
+	int len = count;
+	int i;
+
+	pr_info("write: count: %ld, fpos: %lld", count, *f_pos);
+
+	if (len > MAX_NAME) {
+		len = MAX_NAME;
+	}
+
+	copy_from_user(&name, buf, len);
+	for (i = 0; i < len; i++) {
+		if (name[i] == '\n') {
+			name[i] = '\0';
+			break;
+		}
+	}
+	name[MAX_NAME-1] = '\0';
+
+	*f_pos += count;
+
+	return count;
 }
 
 struct file_operations happyb_fops = {
