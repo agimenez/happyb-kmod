@@ -43,14 +43,14 @@ static ssize_t happyb_write(struct file *file, const char *buf, size_t count, lo
 }
 
 struct file_operations happyb_fops = {
-    read: happyb_read,
-    write: happyb_write,
+	read: happyb_read,
+	write: happyb_write,
 };
 
 struct miscdevice happyb_dev = {
-    .minor = MISC_DYNAMIC_MINOR,
-    .name = "happy-birthday",
-    .fops = &happyb_fops,
+	.minor = MISC_DYNAMIC_MINOR,
+	.name = "happy-birthday",
+	.fops = &happyb_fops,
 	.mode = 0666,
 };
 
