@@ -75,7 +75,7 @@ struct miscdevice happyb_dev = {
 };
 
 
-static int happyb_init(void)
+static int __init happyb_init(void)
 {
 	int res;
 
@@ -92,7 +92,7 @@ static int happyb_init(void)
 	return 0;
 }
 
-static void happyb_exit(void)
+static void __exit happyb_exit(void)
 {
 	misc_deregister(&happyb_dev);
 	pr_info("Have a nice day, %s\n", name);
