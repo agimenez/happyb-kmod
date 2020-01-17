@@ -12,6 +12,7 @@ MODULE_AUTHOR("L. Alberto Giménez <alberto.gimenez@capside.com>");
 MODULE_LICENSE("GPL");
 
 static char *param_name = "my friend";
+module_param(param_name, charp, S_IRUGO);
 
 static char name[MAX_NAME];
 
